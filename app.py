@@ -12,6 +12,41 @@ lst = ['Malignant','Beningn','no skin ']
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
 
+import requests
+from flask import Flask,render_template
+URL = "https://discover.search.hereapi.com/v1/discover"
+latitude = 12.96643
+longitude = 77.5871
+api_key = '1idGsC3uqoA3MwN0NfyNVlSOqSxpD96MeFZh2zSB8fE' # Acquire from developer.here.com
+query = 'Skin Cancer hospital'
+limit = 5
+
+PARAMS = {
+            'apikey':api_key,
+            'q':query,
+            'limit': limit,
+            'at':'{},{}'.format(latitude,longitude)
+         } 
+
+# sending get request and saving the response as response object 
+r = requests.get(url = URL, params = PARAMS) 
+data = r.json()
+print(data['items'][0]['categories'][0]['name'])
+
+hospitalOne = data['items'][0]['title']
+hospitalOne_address =  data['items'][0]['address']['label']
+hospitalOne_latitude = data['items'][0]['position']['lat']
+hospitalOne_longitude = data['items'][0]['position']['lng']
+hospitalOne_contect = data['items'][0]['contacts'][0]['mobile'][0]['value']
+hospitalOne_distance = data['items'][0]['distance']
+hospitalOne_Docter_name = data['items'][0]['categories'][0]['name']
+
+hospitalTwo = data['items'][1]['title']
+hospitalTwo_address =  data['items'][1]['address']['label']
+hospitalTwo_latitude = data['items'][1]['position']['lat']
+hospitalTwo_longitude = data['items'][1]['position']['lng']
+
+
 
 app = Flask(__name__)
 #run_with_ngrok(app)
@@ -92,7 +127,24 @@ def upload():
       #pred=prediction
       #return render_template("complete_display_image.html", image_name=filename, prediction=lst[1])
 
-
+@app.route('/location')
+def location():
+	return render_template('map.html',
+                            latitude = latitude,
+                            longitude = longitude,
+                            apikey=api_key,
+                            oneName=hospitalOne,
+                            OneAddress=hospitalOne_address,
+                            OneDocterName=hospitalOne_Docter_name,
+                            OneContect=hospitalOne_contect,
+                            OneDistance=hospitalOne_distance,
+                            oneLatitude=hospitalOne_latitude,
+                            oneLongitude=hospitalOne_longitude,
+                            twoName=hospitalTwo,
+                            twoAddress=hospitalTwo_address,
+                            twoLatitude=hospitalTwo_latitude,
+                            twoLongitude=hospitalTwo_longitude,
+                            )
     
 @app.route('/upload/<filename>')
 def send_image(filename):
