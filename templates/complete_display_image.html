@@ -41,14 +41,15 @@
 <br>
 <br>
 <p>
-<img src=" {{url_for('send_image', filename=image_name, pred_prone=pred_prone,pred_normal=pred_normal)}}" height=20% width=20%>
+<img src=" {{url_for('send_image', filename=image_name, class1=class1,class2=class2,class3=class3)}}" height=20% width=20%>
 </p>
 <br>
-<h2 style="font-size: 30px;"><strong>You are</strong></h2>
-<h1 style="color: red;"> {{ pred_prone }} <strong style="color: black;">Percent Benign Type</strong></h1>
-<h1 style="color: green;"> {{ pred_normal }} <strong style="color: black;">Percent Malignant Type</strong></h1>
+<h2 style="font-size: 30px;"><strong>Results are</strong></h2>
+<h1 style="color: red;"> {{ class1 }} <strong style="color: black;">Percent Benign Type</strong></h1>
+<h1 style="color: green;"> {{ class2 }} <strong style="color: black;">Percent Malignant Type</strong></h1>
+<h1 style="color: blue;"> {{ class3 }} <strong style="color: black;">NOT Skin Cancer Type</strong></h1>
 <br>
-<a role="button" class="btn btn-success" href="https://www.google.com/search?sxsrf=ALeKk03hJd-336m20Kq31hu-0Sye6zlItQ%3A1600852238221&ei=DhFrX9mJDcfw9QPCk7PICg&q=skin+cancer+doctor+near+me&oq=skin+cancer+doctor+n&gs_lcp=CgZwc3ktYWIQARgAMgQIIxAnMgQIABBDMgIIADIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeOgQIABBHUIQSWKEpYNY3aABwA3gAgAHuCogBwg2SAQczLTEuNy0xmAEAoAEBqgEHZ3dzLXdpesgBCMABAQ&sclient=psy-ab">Nearest Doctors For You</a>
+<a role="button" class="btn btn-success" href="/location">Nearest Doctors For You</a>
 		</div>
 	</div>
 </body>
