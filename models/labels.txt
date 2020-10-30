@@ -1,3 +1,0 @@
-0 Benign
-1 Malignent
-2 Not Skin
